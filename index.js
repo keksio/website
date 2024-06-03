@@ -3,4 +3,3 @@ function printMessage() {
   let someText = document.getElementById('userInput').value;
   document.getElementById('userTextOutput').innerHTML = someText;
 }
-if value=none 
