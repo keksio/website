@@ -1,3 +1,3 @@
 function alertbutton() {
-  alert("sperma")
+  alert("fajny tekst")
 }
