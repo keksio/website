@@ -1,3 +1,3 @@
 function alertbutton() {
-  alert("fajny tekst")
+  alert("super tekst")
 }
