@@ -84,9 +84,15 @@
             transform: scale(1.1);
         }
 
-        .clock {
-            font-size: 18px;
-            margin-right: 10px;
+        .calculator {
+            position: fixed;
+            bottom: 100px;
+            right: 50px;
+            background-color: #fff;
+            border: 2px solid #333;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -98,18 +104,37 @@
 
     <div class="start-menu" id="start-menu">
         <ul>
-            <li>Program 1</li>
-            <li>Program 2</li>
-            <li>Program 3</li>
+            <!-- Usunięto sekcję "Program 1", "Program 2", "Program 3" -->
         </ul>
     </div>
 
     <div class="desktop">
-        <div class="desktop-icon">Program 1</div>
-        <div class="desktop-icon">Program 2</div>
-        <div class="desktop-icon">Program 3</div>
-        <div class="desktop-icon">Kalkulator</div>
-        <div class="desktop-icon">Przeglądarka</div>
+        <div class="desktop-icon calculator">Kalkulator</div>
+    </div>
+
+    <div class="calculator" id="calculator">
+        <input type="text" id="display" readonly>
+        <br>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('+')">+</button>
+        <br>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('-')">-</button>
+        <br>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('*')">*</button>
+        <br>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendToDisplay('/')">/</button>
     </div>
 
     <script>
@@ -131,7 +156,27 @@
 
         updateClock();
         setInterval(updateClock, 1000);
+
+        // Calculator functionality
+        const display = document.getElementById('display');
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
     </script>
 </body>
 </html>
+
 
