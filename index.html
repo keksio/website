@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Operating System</title>
+    <title>My OS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +20,22 @@
             bottom: 0;
             left: 0;
             width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .start-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
         .start-menu {
@@ -32,8 +48,25 @@
             display: none;
         }
 
+        .start-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .start-menu ul li {
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .desktop {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            margin-bottom: 60px; /* Adjust margin to make room for taskbar */
+        }
+
         .desktop-icon {
-            display: inline-block;
             margin: 10px;
             width: 100px;
             height: 100px;
@@ -41,12 +74,19 @@
             text-align: center;
             line-height: 100px;
             cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .desktop-icon:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="taskbar">
-        <button id="start-button">Start</button>
+        <button class="start-button" id="start-button">Start</button>
     </div>
 
     <div class="start-menu" id="start-menu">
