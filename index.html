@@ -98,19 +98,23 @@
         }
 
         .calculator input[type="text"] {
-            width: 100%;
+            width: calc(100% - 20px);
             margin-bottom: 10px;
             padding: 10px;
             box-sizing: border-box;
             font-size: 18px;
         }
 
+        .calculator .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
         .calculator button {
-            width: 30%;
+            width: calc(25% - 5px);
             padding: 10px;
             font-size: 16px;
-            margin-right: 5px;
-            margin-bottom: 5px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -141,27 +145,31 @@
 
     <div class="calculator" id="calculator">
         <input type="text" id="display" readonly>
-        <br>
-        <button onclick="appendToDisplay('7')">7</button>
-        <button onclick="appendToDisplay('8')">8</button>
-        <button onclick="appendToDisplay('9')">9</button>
-        <button onclick="appendToDisplay('+')">+</button>
-        <br>
-        <button onclick="appendToDisplay('4')">4</button>
-        <button onclick="appendToDisplay('5')">5</button>
-        <button onclick="appendToDisplay('6')">6</button>
-        <button onclick="appendToDisplay('-')">-</button>
-        <br>
-        <button onclick="appendToDisplay('1')">1</button>
-        <button onclick="appendToDisplay('2')">2</button>
-        <button onclick="appendToDisplay('3')">3</button>
-        <button onclick="appendToDisplay('*')">*</button>
-        <br>
-        <button onclick="appendToDisplay('0')">0</button>
-        <button onclick="appendToDisplay('.')">.</button>
-        <button onclick="clearDisplay()">C</button>
-        <button onclick="calculate()">=</button>
-        <button onclick="appendToDisplay('/')">/</button>
+        <div class="button-row">
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('/')">/</button>
+        </div>
     </div>
 
     <script>
@@ -213,6 +221,5 @@
         }
     </script>
 </body>
-</html>
-
+</html
 
