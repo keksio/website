@@ -21,7 +21,8 @@
             left: 0;
             width: 100%;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .start-button {
@@ -82,10 +83,16 @@
         .desktop-icon:hover {
             transform: scale(1.1);
         }
+
+        .clock {
+            font-size: 18px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="taskbar">
+        <div class="clock" id="clock"></div>
         <button class="start-button" id="start-button">Start</button>
     </div>
 
@@ -101,15 +108,29 @@
         <div class="desktop-icon">Program 1</div>
         <div class="desktop-icon">Program 2</div>
         <div class="desktop-icon">Program 3</div>
+        <div class="desktop-icon">Kalkulator</div>
+        <div class="desktop-icon">Przeglądarka</div>
     </div>
 
     <script>
         const startButton = document.getElementById('start-button');
         const startMenu = document.getElementById('start-menu');
+        const clock = document.getElementById('clock');
 
         startButton.addEventListener('click', () => {
             startMenu.style.display = (startMenu.style.display === 'block') ? 'none' : 'block';
         });
+
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
 </body>
 </html>
