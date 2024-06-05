@@ -2,38 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KURWA</title>
-    <script src="index.js"></script>
+    <title>My Operating System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .taskbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .start-menu {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: none;
+        }
+
+        .desktop-icon {
+            display: inline-block;
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <p id="output">wpisz co kolwiek</p>
-    <input type="text" id="userInput">
-    <br>
-    <button onclick="printMessage()">jeśli kurwo tekst napisałeś to kliknij kurwa</button>
-    <p id="userTextOutput"></p>
+    <div class="taskbar">
+        <button id="start-button">Start</button>
+    </div>
+
+    <div class="start-menu" id="start-menu">
+        <ul>
+            <li>Program 1</li>
+            <li>Program 2</li>
+            <li>Program 3</li>
+        </ul>
+    </div>
+
+    <div class="desktop">
+        <div class="desktop-icon">Program 1</div>
+        <div class="desktop-icon">Program 2</div>
+        <div class="desktop-icon">Program 3</div>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('start-button');
+        const startMenu = document.getElementById('start-menu');
+
+        startButton.addEventListener('click', () => {
+            startMenu.style.display = (startMenu.style.display === 'block') ? 'none' : 'block';
+        });
+    </script>
 </body>
 </html>
-<style>
-    button{
-        color: pink;
-        height: 34px;
-        width: 200px;
-        border-radius: 34px;
-        border: none;
-        background-color: purple;
-        
-    }
-    input{
-        border: none;
-        background-color: pink;
-        height: 34px;
-        width: 100px;
-    
-        }
-    body{
-        color: blue;
-    }
-    
-</style>
+
