@@ -1,98 +1,107 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moja Strona</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        section {
-            margin: 20px 0;
-        }
-
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Mini System Operacyjny</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f0f0; }
+  .window { position: absolute; border: 1px solid #ccc; background: #fff; padding: 10px; width: 300px; height: 200px; }
+  .title-bar { background: #ddd; padding: 5px; cursor: move; }
+  .title-bar-text { float: left; }
+  .close { float: right; cursor: pointer; }
+  .file-explorer { list-style-type: none; padding: 0; }
+  .file-item { cursor: pointer; }
+  #start-button { margin-top: 10px; }
+  #task-manager { margin-top: 10px; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Moje Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Strona Główna</a></li>
-                <li><a href="#about">O mnie</a></li>
-                <li><a href="#services">Usługi</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="home">
-            <h2>Witamy na mojej stronie</h2>
-            <p>To jest przykładowa strona główna.</p>
-        </section>
-        <section id="about">
-            <h2>O mnie</h2>
-            <p>Jestem profesjonalistą w swojej dziedzinie z wieloletnim doświadczeniem.</p>
-        </section>
-        <section id="services">
-            <h2>Usługi</h2>
-            <ul>
-                <li>Usługa 1</li>
-                <li>Usługa 2</li>
-                <li>Usługa 3</li>
-            </ul>
-        </section>
-        <section id="contact">
-            <h2>Kontakt</h2>
-            <p>Możesz się ze mną skontaktować przez email: <a href="mailto:example@example.com">example@example.com</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Moje Imię. Wszelkie prawa zastrzeżone.</p>
-    </footer>
+
+<div class="window" id="window1" style="top: 50px; left: 50px;">
+  <div class="title-bar" onmousedown="startDrag(event, 'window1')">
+    <div class="title-bar-text">Mój Plik</div>
+    <div class="close" onclick="closeWindow('window1')">X</div>
+  </div>
+  <p>To jest przykładowy plik w moim mini systemie operacyjnym.</p>
+</div>
+
+<div class="window" id="window2" style="top: 100px; left: 100px;">
+  <div class="title-bar" onmousedown="startDrag(event, 'window2')">
+    <div class="title-bar-text">Notatnik</div>
+    <div class="close" onclick="closeWindow('window2')">X</div>
+  </div>
+  <textarea rows="6" cols="30" placeholder="Wpisz swoje notatki tutaj..."></textarea>
+</div>
+
+<div class="window" id="window3" style="top: 150px; left: 150px;">
+  <div class="title-bar" onmousedown="startDrag(event, 'window3')">
+    <div class="title-bar-text">Przeglądarka plików</div>
+    <div class="close" onclick="closeWindow('window3')">X</div>
+  </div>
+  <ul class="file-explorer">
+    <li class="file-item" onclick="openFile('Plik1.txt')">Plik1.txt</li>
+    <li class="file-item" onclick="openFile('Plik2.txt')">Plik2.txt</li>
+    <li class="file-item" onclick="openFile('Plik3.txt')">Plik3.txt</li>
+  </ul>
+</div>
+
+<button id="start-button" onclick="toggleStartMenu()">Start</button>
+<div id="start-menu" style="display: none;">
+  <button onclick="openApp('Kalkulator')">Kalkulator</button>
+  <button onclick="openApp('Przeglądarka')">Przeglądarka</button>
+</div>
+
+<div id="task-manager"></div>
+
+<script>
+var currentWindow;
+var offsetX, offsetY;
+var openWindows = [];
+
+function startDrag(e, id) {
+  currentWindow = document.getElementById(id);
+  offsetX = e.clientX - currentWindow.getBoundingClientRect().left;
+  offsetY = e.clientY - currentWindow.getBoundingClientRect().top;
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDrag);
+}
+
+function drag(e) {
+  currentWindow.style.top = (e.clientY - offsetY) + 'px';
+  currentWindow.style.left = (e.clientX - offsetX) + 'px';
+}
+
+function stopDrag() {
+  document.removeEventListener('mousemove', drag);
+}
+
+function closeWindow(id) {
+  document.getElementById(id).style.display = 'none';
+  openWindows = openWindows.filter(win => win !== id);
+  updateTaskManager();
+}
+
+function openFile(filename) {
+  alert('Otwieram plik: ' + filename);
+}
+
+function toggleStartMenu() {
+  document.getElementById('start-menu').style.display = 'block';
+}
+
+function openApp(appName) {
+  alert('Uruchamiam aplikację: ' + appName);
+}
+
+function updateTaskManager() {
+  var taskManager = document.getElementById('task-manager');
+  taskManager.innerHTML = 'Uruchomione aplikacje:';
+  openWindows.forEach(win => {
+    taskManager.innerHTML += '<br>' + win;
+  });
+}
+</script>
+
 </body>
 </html>
+
