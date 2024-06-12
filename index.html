@@ -4,39 +4,91 @@
 <meta charset="UTF-8">
 <title>Mini System Operacyjny</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f0f0f0; }
-  .window { position: absolute; border: 1px solid #ccc; background: #fff; padding: 10px; width: 300px; height: 200px; }
-  .title-bar { background: #ddd; padding: 5px; cursor: move; }
-  .title-bar-text { float: left; }
-  .close { float: right; cursor: pointer; }
-  .file-explorer { list-style-type: none; padding: 0; }
-  .file-item { cursor: pointer; }
-  #start-button { margin-top: 10px; }
-  #task-manager { margin-top: 10px; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    overflow: hidden;
+  }
+  .window {
+    position: absolute;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .title-bar {
+    background: #ddd;
+    padding: 5px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+  }
+  .close, .minimize {
+    cursor: pointer;
+  }
+  .file-explorer {
+    list-style-type: none;
+    padding: 0;
+  }
+  .file-item {
+    cursor: pointer;
+  }
+  #start-button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+  }
+  #start-menu {
+    position: fixed;
+    bottom: 40px;
+    left: 10px;
+    display: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  #task-manager {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
 </style>
 </head>
 <body>
 
 <div class="window" id="window1" style="top: 50px; left: 50px;">
-  <div class="title-bar" onmousedown="startDrag(event, 'window1')">
+  <div class="title-bar">
     <div class="title-bar-text">Mój Plik</div>
-    <div class="close" onclick="closeWindow('window1')">X</div>
+    <div>
+      <span class="minimize" onclick="minimizeWindow('window1')">_</span>
+      <span class="close" onclick="closeWindow('window1')">X</span>
+    </div>
   </div>
   <p>To jest przykładowy plik w moim mini systemie operacyjnym.</p>
 </div>
 
 <div class="window" id="window2" style="top: 100px; left: 100px;">
-  <div class="title-bar" onmousedown="startDrag(event, 'window2')">
+  <div class="title-bar">
     <div class="title-bar-text">Notatnik</div>
-    <div class="close" onclick="closeWindow('window2')">X</div>
+    <div>
+      <span class="minimize" onclick="minimizeWindow('window2')">_</span>
+      <span class="close" onclick="closeWindow('window2')">X</span>
+    </div>
   </div>
   <textarea rows="6" cols="30" placeholder="Wpisz swoje notatki tutaj..."></textarea>
 </div>
 
 <div class="window" id="window3" style="top: 150px; left: 150px;">
-  <div class="title-bar" onmousedown="startDrag(event, 'window3')">
+  <div class="title-bar">
     <div class="title-bar-text">Przeglądarka plików</div>
-    <div class="close" onclick="closeWindow('window3')">X</div>
+    <div>
+      <span class="minimize" onclick="minimizeWindow('window3')">_</span>
+      <span class="close" onclick="closeWindow('window3')">X</span>
+    </div>
   </div>
   <ul class="file-explorer">
     <li class="file-item" onclick="openFile('Plik1.txt')">Plik1.txt</li>
@@ -46,12 +98,12 @@
 </div>
 
 <button id="start-button" onclick="toggleStartMenu()">Start</button>
-<div id="start-menu" style="display: none;">
+<div id="start-menu">
   <button onclick="openApp('Kalkulator')">Kalkulator</button>
   <button onclick="openApp('Przeglądarka')">Przeglądarka</button>
 </div>
 
-<div id="task-manager"></div>
+<div id="task-manager">Uruchomione aplikacje:</div>
 
 <script>
 var currentWindow;
@@ -76,9 +128,16 @@ function stopDrag() {
 }
 
 function closeWindow(id) {
-  document.getElementById(id).style.display = 'none';
-  openWindows = openWindows.filter(win => win !== id);
+  var win = document.getElementById(id);
+  win.style.display = 'none';
+  openWindows = openWindows.filter(winId => winId !== id);
   updateTaskManager();
+}
+
+function minimizeWindow(id) {
+  var win = document.getElementById(id);
+  win.style.display = 'none';
+  // Optionally, add minimized state to the task manager
 }
 
 function openFile(filename) {
@@ -86,11 +145,13 @@ function openFile(filename) {
 }
 
 function toggleStartMenu() {
-  document.getElementById('start-menu').style.display = 'block';
+  var startMenu = document.getElementById('start-menu');
+  startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
 }
 
 function openApp(appName) {
   alert('Uruchamiam aplikację: ' + appName);
+  // Implement opening of new windows here
 }
 
 function updateTaskManager() {
@@ -100,8 +161,16 @@ function updateTaskManager() {
     taskManager.innerHTML += '<br>' + win;
   });
 }
+
+document.querySelectorAll('.window').forEach(win => {
+  win.addEventListener('mousedown', () => {
+    if (!openWindows.includes(win.id)) {
+      openWindows.push(win.id);
+      updateTaskManager();
+    }
+  });
+});
 </script>
 
 </body>
 </html>
-
