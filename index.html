@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html lang="pl">
-  
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przykładowa Strona</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6787427186263476"
+        crossorigin="anonymous"></script>
+    <style>
+        .blok1 {
+            border: 1px solid black; /* Dodano solidną obramówkę */
+            background-color: purple;
+            color: white; /* Zmieniono kolor tekstu na biały dla lepszej czytelności */
+            padding: 10px;
+            margin: 20px;
+        }
+        
+        .sigma {
+            background-color: purple;
+            color: white; /* Zmieniono kolor tekstu na biały dla lepszej czytelności */
+            height: 34px;
+            border-radius: 34px;
+            border: none;
+            cursor: pointer; /* Dodano wskaźnik kursora */
+        }
+        
+        .sigma:hover {
+            opacity: 0.7;
+        }
+        
+        .sigma:active {
+            opacity: 0.5;
+        }
+        
+        .nie {
+            cursor: not-allowed;
+            background-color: grey; /* Dodano tło dla nieaktywnego przycisku */
+            color: white; /* Zmieniono kolor tekstu na biały dla lepszej czytelności */
+            border: none;
+            height: 34px;
+            border-radius: 34px;
+        }
+    </style>
+</head>
+
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6787427186263476"
-     crossorigin="anonymous"></script>
-  <div class="blok1">
-    <h2>jakiś tekst</h2>
-  </div>
-<button onclick="alert('sigma')" class="sigma" >sigma przycisk</button>
-<style>
-  .blok1 {
-    border: 1px;
-    background-color: purple;
-    padding: 10px;
-    margin: 20px;
-  }
-  .sigma {
-    background-color: purple;
-    height: 34px;
-    border-radius: 34px;
-    border: none;
-  }
-.sigma:hover {
-  opacity: 0.7;
-}
-.sigma:active {
-  opacity: 0.5;
-}
-  .nie{
-    cursor: not-allowed;
-</style>
-  
-<button class="nie">jestem sigmą</button>
-  
+    <div class="blok1">
+        <h2>jakiś tekst</h2>
+    </div>
+    <button onclick="alert('sigma')" class="sigma">sigma przycisk</button>
+    <button class="nie">jestem sigmą</button>
 </body>
+
 </html>
